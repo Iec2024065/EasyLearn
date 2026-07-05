@@ -91,10 +91,11 @@ def create_app():
          resources={r"/*": {"origins": allowed_origins}},
          supports_credentials=True)
 
-    # ✅ Proper session cookie setup for local development
+    # Session cookie setup — secure in production (HTTPS), not in local dev
+    is_production = os.getenv("FLASK_ENV", "development") == "production"
     app.config.update(
         SESSION_COOKIE_SAMESITE="None",
-        SESSION_COOKIE_SECURE=False  # set True only for HTTPS
+        SESSION_COOKIE_SECURE=is_production
     )
 
     # Register blueprints
@@ -118,12 +119,5 @@ if __name__ == "__main__":
     app = create_app()
     app.run(host="0.0.0.0", port=5000, debug=True)
 
-
-from dotenv import load_dotenv
-import os
-
-# Load from backend/.env (relative to project root)
-dotenv_path = os.path.join(os.path.dirname(__file__), 'backend', '.env')
-load_dotenv(dotenv_path)
-
-print("Loaded EMAIL:", os.getenv("EMAIL"))  # Test line
+# Expose app at module level for gunicorn (run:app)
+app = create_app()
