@@ -11,10 +11,14 @@ const nextConfig = {
   },
   async rewrites() {
     const backendUrl = process.env.NEXT_PUBLIC_BACKEND_URL || "http://127.0.0.1:5000";
+    // Ensure backendUrl is a valid absolute URL before using it
+    if (!backendUrl.startsWith("http://") && !backendUrl.startsWith("https://")) {
+      return [];
+    }
     return [
       {
         source: "/api/:path*",
-        destination: `${backendUrl}/:path*`,
+        destination: `${backendUrl}/api/:path*`,
       },
     ];
   },
