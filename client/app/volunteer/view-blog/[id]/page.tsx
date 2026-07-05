@@ -28,7 +28,7 @@ export default function ViewBlogPage() {
 
     const fetchBlog = async () => {
       try {
-        const response = await fetch(`http://127.0.0.1:5000/volunteer/blog/${id}`)
+        const response = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL || "http://127.0.0.1:5000"}/volunteer/blog/${id}`)
         if (response.ok) {
           const data: Blog = await response.json()
           setBlog(data)

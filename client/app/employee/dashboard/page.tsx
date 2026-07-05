@@ -51,7 +51,7 @@
 
 //   const fetchStats = async () => {
 //     try {
-//       const response = await fetchWithRetry("http://127.0.0.1:5000/employee/dashboard/counts");
+//       const response = await fetchWithRetry(`${process.env.NEXT_PUBLIC_BACKEND_URL || "http://127.0.0.1:5000"}/employee/dashboard/counts`);
 //       if (response) {
 //         const data = await response.json();
 //         setStats({
@@ -68,7 +68,7 @@
 //   useEffect(() => {
 //     const fetchPendingVolunteers = async () => {
 //       try {
-//         const response = await fetchWithRetry("http://127.0.0.1:5000/employee/volunteers/pending");
+//         const response = await fetchWithRetry(`${process.env.NEXT_PUBLIC_BACKEND_URL || "http://127.0.0.1:5000"}/employee/volunteers/pending`);
 //         if (response) {
 //           const data = await response.json();
 //           setPendingVolunteers(data);
@@ -81,7 +81,7 @@
 
 //     const fetchPendingContent = async () => {
 //       try {
-//         const response = await fetchWithRetry("http://127.0.0.1:5000/employee/content/pending");
+//         const response = await fetchWithRetry(`${process.env.NEXT_PUBLIC_BACKEND_URL || "http://127.0.0.1:5000"}/employee/content/pending`);
 //         if (response) {
 //           const data = await response.json();
 //           setPendingContent(data);
@@ -98,7 +98,7 @@
 
 //   const handleApproveRejectVolunteer = async (volunteerId: number, action: 'approve' | 'reject') => {
 //     try {
-//       const response = await fetchWithRetry("http://127.0.0.1:5000/employee/volunteers/approve", {
+//       const response = await fetchWithRetry(`${process.env.NEXT_PUBLIC_BACKEND_URL || "http://127.0.0.1:5000"}/employee/volunteers/approve`, {
 //         method: "POST",
 //         headers: {
 //           "Content-Type": "application/json",
@@ -118,7 +118,7 @@
 
 //   const handleApproveRejectContent = async (contentId: number, contentType: 'course' | 'blog', action: 'approve' | 'reject') => {
 //     try {
-//       const response = await fetchWithRetry("http://127.0.0.1:5000/employee/content/approve", {
+//       const response = await fetchWithRetry(`${process.env.NEXT_PUBLIC_BACKEND_URL || "http://127.0.0.1:5000"}/employee/content/approve`, {
 //         method: "POST",
 //         headers: {
 //           "Content-Type": "application/json",
@@ -218,12 +218,12 @@ export default function EmployeeDashboard() {
         setError("");
 
         // Step 1: Wait for backend (simple health check)
-        const health = await fetch("http://127.0.0.1:5000/");
+        const health = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL || "http://127.0.0.1:5000"}/`);
         if (!health.ok) throw new Error("Backend not reachable");
 
         // Step 2: Fetch stats
         const statsRes = await fetchWithRetry(
-          "http://127.0.0.1:5000/employee/dashboard/counts"
+          `${process.env.NEXT_PUBLIC_BACKEND_URL || "http://127.0.0.1:5000"}/employee/dashboard/counts`
         );
         const statsData = await statsRes.json();
         setStats({
@@ -234,14 +234,14 @@ export default function EmployeeDashboard() {
 
         // Step 3: Fetch pending volunteers
         const volunteersRes = await fetchWithRetry(
-          "http://127.0.0.1:5000/employee/volunteers/pending"
+          `${process.env.NEXT_PUBLIC_BACKEND_URL || "http://127.0.0.1:5000"}/employee/volunteers/pending`
         );
         const volunteersData = await volunteersRes.json();
         setPendingVolunteers(volunteersData || []);
 
         // Step 4: Fetch pending content
         const contentRes = await fetchWithRetry(
-          "http://127.0.0.1:5000/employee/content/pending"
+          `${process.env.NEXT_PUBLIC_BACKEND_URL || "http://127.0.0.1:5000"}/employee/content/pending`
         );
         const contentData = await contentRes.json();
         setPendingContent(contentData || []);
@@ -262,7 +262,7 @@ export default function EmployeeDashboard() {
   ) => {
     try {
       const response = await fetchWithRetry(
-        "http://127.0.0.1:5000/employee/volunteers/approve",
+        `${process.env.NEXT_PUBLIC_BACKEND_URL || "http://127.0.0.1:5000"}/employee/volunteers/approve`,
         {
           method: "POST",
           body: JSON.stringify({ volunteer_id: volunteerId, action }),
@@ -285,7 +285,7 @@ export default function EmployeeDashboard() {
   ) => {
     try {
       const response = await fetchWithRetry(
-        "http://127.0.0.1:5000/employee/content/approve",
+        `${process.env.NEXT_PUBLIC_BACKEND_URL || "http://127.0.0.1:5000"}/employee/content/approve`,
         {
           method: "POST",
           body: JSON.stringify({

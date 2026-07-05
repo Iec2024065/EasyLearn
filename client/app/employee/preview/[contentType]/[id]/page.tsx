@@ -19,7 +19,7 @@
 //       setIsLoading(true)
 //       setError("")
 //       try {
-//         const response = await fetch(`http://127.0.0.1:5000/employee/${contentType}/${id}`)
+//         const response = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL || "http://127.0.0.1:5000"}/employee/${contentType}/${id}`)
 //         console.log(response) 
 //         const data = await response.json()
 //         console.log(data)
@@ -128,7 +128,7 @@ export default function ContentPreviewPage() {
       setIsLoading(true)
       setError("")
       try {
-        const response = await fetch(`http://127.0.0.1:5000/employee/${contentType}/${id}`)
+        const response = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL || "http://127.0.0.1:5000"}/employee/${contentType}/${id}`)
         const data = await response.json()
       
         console.log("data", data)

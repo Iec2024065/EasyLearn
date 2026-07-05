@@ -33,7 +33,7 @@ export default function EditProfilePage() {
 
     const fetchProfile = async () => {
       try {
-        const response = await fetch(`http://127.0.0.1:5000/volunteer/profile/${volunteer_id}`)
+        const response = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL || "http://127.0.0.1:5000"}/volunteer/profile/${volunteer_id}`)
         if (response.ok) {
           const data: VolunteerProfile = await response.json()
           setProfile(data)
@@ -65,7 +65,7 @@ export default function EditProfilePage() {
     }
 
     try {
-      const response = await fetch(`http://127.0.0.1:5000/volunteer/profile/${volunteer_id}`, {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL || "http://127.0.0.1:5000"}/volunteer/profile/${volunteer_id}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",

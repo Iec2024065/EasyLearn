@@ -10,7 +10,8 @@ export default function SupportPage() {
 
   const handleSubmit = async (e: any) => {
     e.preventDefault();
-    const res = await fetch('http://127.0.0.1:5000/support/submit', {
+    const backendUrl = process.env.NEXT_PUBLIC_BACKEND_URL || "http://127.0.0.1:5000";
+    const res = await fetch(`${backendUrl}/support/submit`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       credentials: 'include',

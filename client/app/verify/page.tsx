@@ -1,11 +1,11 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { Suspense, useEffect, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 
-const VerifyPage = () => {
+const VerifyContent = () => {
   const searchParams = useSearchParams();
   const email = searchParams.get("email");
   const [message, setMessage] = useState("Verifying your email...");
@@ -19,7 +19,8 @@ const VerifyPage = () => {
       }
 
       try {
-        const response = await fetch("http://127.0.0.1:5000/api/users/verify", {
+        const backendUrl = process.env.NEXT_PUBLIC_BACKEND_URL || "http://127.0.0.1:5000";
+        const response = await fetch(`${backendUrl}/api/users/verify`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -54,6 +55,14 @@ const VerifyPage = () => {
         <Button className="mt-4">Go to Login</Button>
       </Link>
     </div>
+  );
+};
+
+const VerifyPage = () => {
+  return (
+    <Suspense fallback={<div className="max-w-md mx-auto mt-10 text-center">Loading...</div>}>
+      <VerifyContent />
+    </Suspense>
   );
 };
 

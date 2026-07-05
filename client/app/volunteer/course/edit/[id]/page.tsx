@@ -21,7 +21,7 @@ export default function EditCoursePage() {
   useEffect(() => {
     const fetchCourse = async () => {
       try {
-        const response = await fetch(`http://127.0.0.1:5000/course/${id}`)
+        const response = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL || "http://127.0.0.1:5000"}/course/${id}`)
         if (response.ok) {
           const data = await response.json()
           setTitle(data.title)
@@ -46,7 +46,7 @@ export default function EditCoursePage() {
     setError("")
 
     try {
-      const response = await fetch(`http://127.0.0.1:5000/course/${id}`, {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL || "http://127.0.0.1:5000"}/course/${id}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",

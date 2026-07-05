@@ -66,7 +66,7 @@ export default function VolunteerDashboard() {
 
       try {
         // Fetch dashboard stats
-        const dashboardResponse = await fetch("http://127.0.0.1:5000/volunteer/dashboard", {
+        const dashboardResponse = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL || "http://127.0.0.1:5000"}/volunteer/dashboard`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -84,7 +84,7 @@ export default function VolunteerDashboard() {
         }
 
         // Fetch courses
-        const coursesResponse = await fetch(`http://127.0.0.1:5000/volunteer/courses/${volunteer_id}`)
+        const coursesResponse = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL || "http://127.0.0.1:5000"}/volunteer/courses/${volunteer_id}`)
         if (coursesResponse.ok) {
           const coursesData: Course[] = await coursesResponse.json()
           setCourses(coursesData)
@@ -94,7 +94,7 @@ export default function VolunteerDashboard() {
         }
 
         // Fetch blogs
-        const blogsResponse = await fetch(`http://127.0.0.1:5000/volunteer/blogs/${volunteer_id}`)
+        const blogsResponse = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL || "http://127.0.0.1:5000"}/volunteer/blogs/${volunteer_id}`)
         if (blogsResponse.ok) {
           const blogsData: Blog[] = await blogsResponse.json()
           setBlogs(blogsData)
@@ -104,7 +104,7 @@ export default function VolunteerDashboard() {
         }
 
         // Fetch profile
-        const profileResponse = await fetch(`http://127.0.0.1:5000/volunteer/profile/${volunteer_id}`)
+        const profileResponse = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL || "http://127.0.0.1:5000"}/volunteer/profile/${volunteer_id}`)
         if (profileResponse.ok) {
           const profileData: VolunteerProfile = await profileResponse.json()
           setProfile(profileData)

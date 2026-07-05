@@ -45,7 +45,7 @@ export default function LoginPage() {
         throw new Error(`Failed to fetch ${url} after ${retries} attempts`);
       };
       
-      const response = await fetchWithRetry("http://127.0.0.1:5000/volunteer/login", {
+      const response = await fetchWithRetry(`${process.env.NEXT_PUBLIC_BACKEND_URL || "http://127.0.0.1:5000"}/volunteer/login`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -106,7 +106,7 @@ export default function LoginPage() {
         throw new Error(`Failed to fetch ${url} after ${retries} attempts`);
       };
 
-      const response = await fetchWithRetry("http://127.0.0.1:5000/api/users/login", {
+      const response = await fetchWithRetry(`${process.env.NEXT_PUBLIC_BACKEND_URL || "http://127.0.0.1:5000"}/api/users/login`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -161,7 +161,7 @@ export default function LoginPage() {
         throw new Error(`Failed to fetch ${url} after ${retries} attempts`);
       };
 
-  //     const response = await fetchWithRetry("http://127.0.0.1:5000/employee/login", {
+  //     const response = await fetchWithRetry(`${process.env.NEXT_PUBLIC_BACKEND_URL || "http://127.0.0.1:5000"}/employee/login`, {
   //       method: "POST",
   //       headers: {
   //         "Content-Type": "application/json",
@@ -192,7 +192,7 @@ export default function LoginPage() {
   //   }
   // };
 
-  const response = await fetch("http://127.0.0.1:5000/employee/login", {
+  const response = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL || "http://127.0.0.1:5000"}/employee/login`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(employeeForm),

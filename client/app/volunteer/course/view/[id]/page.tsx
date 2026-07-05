@@ -14,7 +14,7 @@ export default function ViewCoursePage() {
   useEffect(() => {
     const fetchCourse = async () => {
       try {
-        const response = await fetch(`http://127.0.0.1:5000/course/${id}`)
+        const response = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL || "http://127.0.0.1:5000"}/course/${id}`)
         if (response.ok) {
           const data = await response.json()
           setCourse(data)

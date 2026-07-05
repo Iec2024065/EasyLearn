@@ -35,7 +35,7 @@ export default function EditCoursePage() {
 
     const fetchCourse = async () => {
       try {
-        const response = await fetch(`http://127.0.0.1:5000/volunteer/course/${id}`)
+        const response = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL || "http://127.0.0.1:5000"}/volunteer/course/${id}`)
         if (response.ok) {
           const data: Course = await response.json()
           setCourse(data)
@@ -62,7 +62,7 @@ export default function EditCoursePage() {
     e.preventDefault()
     setIsLoading(true)
     try {
-      const response = await fetch(`http://127.0.0.1:5000/volunteer/course/${id}`, {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL || "http://127.0.0.1:5000"}/volunteer/course/${id}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",

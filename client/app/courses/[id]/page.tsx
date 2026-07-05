@@ -23,7 +23,7 @@
 
 //   useEffect(() => {
 //     if (id) {
-//       fetch(`http://localhost:5000/course/public/${id}`)
+//       fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL || "http://127.0.0.1:5000"}/course/public/${id}`)
 //         .then((res) => res.json())
 //         .then((data) => setCourse(data))
 //         .catch((err) => console.error("Error fetching course:", err))
@@ -143,7 +143,7 @@ export default function CourseDetailPage() {
 
   useEffect(() => {
     if (id) {
-      fetch(`http://localhost:5000/course/public/${id}`)
+      fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL || "http://127.0.0.1:5000"}/course/public/${id}`)
         .then((res) => res.json())
         .then((data) => {
           // Map backend fields to frontend fields if needed
