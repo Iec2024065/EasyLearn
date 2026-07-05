@@ -81,9 +81,14 @@ def create_app():
     app = Flask(__name__)
     app.secret_key = os.getenv("FLASK_SECRET_KEY", "supersecretkey")
 
-    # ✅ Correct CORS setup for session cookies
+    # Build allowed origins from env var + local defaults
+    production_origin = os.getenv("FRONTEND_URL", "")
+    allowed_origins = ["http://localhost:3000", "http://127.0.0.1:3000"]
+    if production_origin:
+        allowed_origins.append(production_origin)
+
     CORS(app,
-         resources={r"/*": {"origins": ["http://localhost:3000", "http://127.0.0.1:3000"]}},
+         resources={r"/*": {"origins": allowed_origins}},
          supports_credentials=True)
 
     # ✅ Proper session cookie setup for local development
