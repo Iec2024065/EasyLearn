@@ -1,2 +1,17 @@
 # EasyLearn
-**EasyLearn** is an accessible, multilingual full-stack web app that democratizes financial literacy. It features interactive lessons, gamified quizzes, and WCAG-compliant, screen-reader-friendly UI.
+
+## database setup
+  run .sql files from /db folder in mysql workbench  
+
+
+## backend setup
+  powershell -ExecutionPolicy ByPass -c "irm https://astral.sh/uv/install.ps1 | iex"  
+  cd backend  
+  uv venv  
+  .venv\Scripts\activate  
+  uv sync"  
+
+
+## run backend
+  cd backend  
+  uv run run.py  
